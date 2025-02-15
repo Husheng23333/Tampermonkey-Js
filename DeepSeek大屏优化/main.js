@@ -12,22 +12,28 @@
 (function () {
     'use strict';
 
-    // 需修改width的完整XPath路径
+    // 需隐藏元素
+    const xpaths_hide = [
+        {key: '/html/body/div[1]/div/div[2]/div[1]/div[1]/div[4]/div[1]', value: '', sleep: 0},
+        {key: '/html/body/div[1]/div/div[2]/div[1]/div[1]/div[2]', value: '', sleep: 0},
+    ];
+
+    const css_hide = [];
+
+    // 需修改width元素
     const xpaths_width = [
         {key: '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[1]', value: '100%', sleep: 0},
         {key: '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[3]/div[1]', value: '100%', sleep: 0},
         {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div[2]', value: '100%', sleep: 0},
     ];
 
-    // 需修改width的CSS选择器
     const css_width = [];
 
-    // 需修改padding的完整XPath路径
+    // 需修改padding元素
     const xpaths_padding = [
         {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]', value: '0 0 0 0', sleep: 1000},
     ];
 
-    // 需修改padding的CSS选择器
     const css_padding = [];
 
     // 封装setTimeout
@@ -37,6 +43,36 @@
 
     // 修改元素样式
     async function modifyElementStyles() {
+        // 隐藏元素
+        for (const xpath of xpaths_hide) {
+            if (xpath.sleep > 0) {
+                await delay(xpath.sleep); // 异步延迟
+            }
+
+            const element = document.evaluate(
+                xpath.key,
+                document,
+                null,
+                XPathResult.FIRST_ORDERED_NODE_TYPE,
+                null
+            ).singleNodeValue;
+
+            if (element) {
+                element.style.display = 'none';
+            } else {
+                console.error(`未找到目标元素：${xpath.key}`);
+            }
+        }
+
+        for (const css of css_hide) {
+            const element = document.querySelector(css);
+            if (element) {
+                element.style.display = 'none';
+            } else {
+                console.error(`未找到目标元素：${css}`);
+            }
+        }
+
         // 修改width
         for (const xpath of xpaths_width) {
             if (xpath.sleep > 0) {
