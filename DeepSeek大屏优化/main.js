@@ -12,27 +12,80 @@
 (function () {
     'use strict';
 
-    // 需修改样式的完整XPath路径
-    const xpaths = [
-        '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[1]',
-        '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[3]/div[1]'
+    // 需修改width的完整XPath路径
+    const xpaths_width = [
+        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[1]', value: '100%', sleep: 0},
+        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[3]/div[1]', value: '100%', sleep: 0},
+        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div[2]', value: '100%', sleep: 0},
     ];
 
-    function modifyElementStyles() {
-        xpaths.forEach(xpath => {
-            let element = document.evaluate(
-                xpath,
-                document,
-                null,
-                XPathResult.FIRST_ORDERED_NODE_TYPE,
-                null
-            ).singleNodeValue;
+    // 需修改width的CSS选择器
+    const css_width = [];
 
+    // 需修改padding的完整XPath路径
+    const xpaths_padding = [
+        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]', value: '0 0 0 0', sleep: 500},
+    ];
+
+    // 需修改padding的CSS选择器
+    const css_padding = [];
+
+    function modifyElementStyles() {
+        // 修改width
+        xpaths_width.forEach(xpath => {
+            setTimeout(() => {
+                let element = document.evaluate(
+                    xpath.key,
+                    document,
+                    null,
+                    XPathResult.FIRST_ORDERED_NODE_TYPE,
+                    null
+                ).singleNodeValue;
+
+                if (element) {
+                    element.style.width = xpath.value;
+                    element.style.maxWidth = xpath.value;
+                } else {
+                    console.error(`未找到目标元素：${xpath.key}`);
+                }
+            }, xpath.sleep);
+        });
+
+        css_width.forEach(css => {
+            let element = document.querySelector(css);
             if (element) {
                 element.style.width = '100%';
                 element.style.maxWidth = '100%';
             } else {
-                console.err(`未找到目标元素：${xpath}`);
+                console.error(`未找到目标元素：${css}`);
+            }
+        });
+
+        // 修改padding
+        xpaths_padding.forEach(xpath => {
+            setTimeout(() => {
+                let element = document.evaluate(
+                    xpath.key,
+                    document,
+                    null,
+                    XPathResult.FIRST_ORDERED_NODE_TYPE,
+                    null
+                ).singleNodeValue;
+
+                if (element) {
+                    element.style.padding = xpath.value;
+                } else {
+                    console.error(`未找到目标元素：${xpath.key}`);
+                }
+            }, xpath.sleep);
+        });
+
+        css_padding.forEach(css => {
+            let element = document.querySelector(css);
+            if (element) {
+                element.style.padding = '0 0 0 0';
+            } else {
+                console.error(`未找到目标元素：${css}`);
             }
         });
     }
