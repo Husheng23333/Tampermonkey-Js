@@ -25,16 +25,22 @@
         {key: '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[1]', value: '100%', sleep: 0},
         {key: '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[3]/div[1]', value: '100%', sleep: 0},
         {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div[2]', value: '100%', sleep: 0},
+        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]', value: '85%', sleep: 0},
     ];
 
     const css_width = [];
 
     // 需修改padding元素
-    const xpaths_padding = [
-        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]', value: '0 0 0 0', sleep: 1000},
-    ];
+    const xpaths_padding = [];
 
     const css_padding = [];
+
+    // 需修改margin元素
+    const xpaths_margin = [
+        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]', value: '0 0 0 0', sleep: 0},
+    ];
+
+    const css_margin = [];
 
     // 封装setTimeout
     function delay(ms) {
@@ -43,6 +49,9 @@
 
     // 修改元素样式
     async function modifyElementStyles() {
+        // 其他
+        readMode();
+
         // 隐藏元素
         for (const xpath of xpaths_hide) {
             if (xpath.sleep > 0) {
@@ -136,6 +145,32 @@
         }
     }
 
+    // 阅读模式(输入框隐藏)
+    function readMode() {
+        const xpath = "/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[3]/div[1]/div/div";
+        const targetElement = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+
+        if (targetElement) {
+            targetElement.style.display = 'none';
+
+            // 监听鼠标移动事件
+            window.addEventListener('mousemove', function(event) {
+                // 获取浏览器窗口的高度和鼠标的位置
+                const windowHeight = window.innerHeight;
+                const mouseY = event.clientY;
+
+                // 底部20%处显示，否则隐藏
+                if (mouseY >= windowHeight * 0.8) {
+                    targetElement.style.display = 'block';
+                } else {
+                    targetElement.style.display = 'none';
+                }
+            });
+        } else {
+            console.error(`未找到目标元素：${xpath}`);
+        }
+    }
+
     // 监听URL变化
     function observeUrlChanges() {
         let lastUrl = location.href;
@@ -175,6 +210,11 @@
     window.addEventListener('load', function () {
         modifyElementStyles();
         observeUrlChanges();
+    });
+
+    // DOM加载完成后执行一次
+    document.addEventListener('DOMContentLoaded', function () {
+        modifyElementStyles();
     });
 
     const observer = new MutationObserver(function () {
