@@ -187,20 +187,28 @@
 
         if (targetElement) {
 
-            // 计算目标元素在窗口中的位置范围
-            const elementRect = targetElement.getBoundingClientRect();
-            const elementTop = elementRect.top;
-            const elementBottom = elementRect.bottom;
-            const elementLeft = elementRect.left;
-            const elementRight = elementRect.right;
+            // 元素位置计算
+            let elementTop, elementBottom, elementLeft, elementRight;
+            function updateElementPosition() {
+                const elementRect = targetElement.getBoundingClientRect();
+                elementTop = elementRect.top + window.scrollY; // 相对于文档顶部的位置
+                elementBottom = elementRect.bottom + window.scrollY; // 相对于文档底部的位置
+                elementLeft = elementRect.left + window.scrollX; // 相对于文档左侧的位置
+                elementRight = elementRect.right + window.scrollX; // 相对于文档右侧的位置
+            }
 
+            updateElementPosition();
+            window.addEventListener('scroll', updateElementPosition);
+            window.addEventListener('resize', updateElementPosition);
+
+            // 首次隐藏输入框
             isReadMode = true;
             targetElement.style.display = 'none';
 
             // 鼠标移动
             window.addEventListener('mousemove', function(event) {
-                const mouseX = event.clientX;
-                const mouseY = event.clientY;
+                const mouseX = event.clientX + window.scrollX;
+                const mouseY = event.clientY + window.scrollY;
 
                 // 判断鼠标是否在目标元素的范围内
                 if (
@@ -269,11 +277,13 @@
     window.addEventListener('load', function () {
         modifyElementStyles();
         observeUrlChanges();
+        resetMode();
     });
 
     // DOM加载完成后执行一次
     document.addEventListener('DOMContentLoaded', function () {
         modifyElementStyles();
+        resetMode();
     });
 
     const observer = new MutationObserver(function () {
