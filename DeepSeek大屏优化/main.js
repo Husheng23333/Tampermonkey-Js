@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeepSeek大屏优化
 // @namespace    http://tampermonkey.net/
-// @version      1.1.0
+// @version      2.0.0
 // @description  优化DeepSeek页面样式
 // @author       HuSheng
 // @match        https://chat.deepseek.com/**
