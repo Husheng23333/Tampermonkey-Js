@@ -869,6 +869,7 @@
     font-weight: bold;
     user-select: none;
     border-color: #cec86b;
+    display: none;
 }
 @keyframes gradient {
     0%{background-color:#F0B27A;}
