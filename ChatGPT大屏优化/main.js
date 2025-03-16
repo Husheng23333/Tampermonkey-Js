@@ -861,15 +861,14 @@
     }
 }
 
+// 这里删了背景颜色
 /*LOGO*/
 #kcg {
-    background: linear-gradient(to top right, #ff5, #FFE6C6, #F9F9B3);
     animation: gradient 6s ease-in-out infinite;
     color: #555;
     font-weight: bold;
     user-select: none;
     border-color: #cec86b;
-    display: none;
 }
 @keyframes gradient {
     0%{background-color:#F0B27A;}
@@ -889,10 +888,11 @@
     left: .5rem;
     bottom: 0;
 }
+
+// 这里删了背景颜色
 /*暗色模式*/
 .kdark {
     #kcg {
-        background: linear-gradient(to top right, #1a0035, #000, #0c006a);
         animation: none;
         color: #ffffff;
         border-color: #00618e;
