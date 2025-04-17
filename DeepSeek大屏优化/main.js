@@ -21,10 +21,9 @@
 
     // 需修改width元素
     const xpaths_width = [
-        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[1]', value: '100%', sleep: 0},
-        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[3]/div[1]', value: '100%', sleep: 0},
-        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]/div[2]', value: '100%', sleep: 0},
-        {key: '/html/body/div[1]/div/div[2]/div[2]/div/div/div[2]', value: '85%', sleep: 0},
+        {key: '/html/body/div[1]/div/div[2]/div[3]/div/div[2]/div/div/div[1]', value: '100%', sleep: 0},
+        {key: '/html/body/div[1]/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div[1]', value: '100%', sleep: 0},
+        {key: '/html/body/div[1]/div/div[2]/div[3]/div/div/div[2]', value: '100%', sleep: 0},
     ];
     const css_width = [];
 
@@ -182,7 +181,7 @@
             return;
         }
 
-        const xpath = "/html/body/div[1]/div/div[2]/div[2]/div/div[2]/div/div/div[3]/div[1]/div/div";
+        const xpath = "/html/body/div[1]/div/div[2]/div[3]/div/div[2]/div/div/div[3]";
         const targetElement = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 
         if (targetElement) {
