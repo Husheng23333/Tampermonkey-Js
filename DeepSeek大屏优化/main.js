@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeepSeek大屏优化
 // @namespace    http://tampermonkey.net/
-// @version      2.3.0
+// @version      2.4.0
 // @description  优化DeepSeek页面样式
 // @author       HuSheng
 // @match        https://chat.deepseek.com/**
@@ -12,286 +12,154 @@
 (function () {
     'use strict';
 
-    // 需隐藏元素
-    const xpaths_hide = [];
-    const css_hide = [
-        {key: '.ebaea5d2', value: '', sleep: 0},
-        {key: '.a1e75851', value: '', sleep: 0},
-        {key: '._2be88ba', value: '', sleep: 0},
+    // xpath选择器修改
+    const xpaths_css = [];
+
+    // CSS选择器修改
+    const css_css = [
+        {key: '.ebaea5d2', value: 'display: none', sleep: 0},
+        {key: '.a1e75851', value: 'display: none', sleep: 0},
+        {key: '._2be88ba', value: 'display: none', sleep: 0},
+
+        {key: '._9a2f8e4', value: 'width: 100%; max-width: 100%', sleep: 0},
+        {key: '.dad65929', value: 'width: 100%; max-width: 100%', sleep: 0},
+        {key: '._9a2f8e4 .aaff8b8f', value: 'width: 80%; max-width: 1000px', sleep: 0},
+
+        {key: '._8f60047 .b13855df', value: 'min-height: 30px', sleep: 0},
+        {key: '._8f60047 .aaff8b8f', value: 'width: 90%; max-width: 100%', sleep: 0},
     ];
 
-    // 需修改width元素
-    const xpaths_width = [];
-    const css_width = [
-        {key: '._9a2f8e4', value: '100%', sleep: 0},
-        {key: '.dad65929', value: '100%', sleep: 0},
-        {key: '.aaff8b8f', value: '100%', sleep: 0},
-    ];
 
-    // 需修改padding元素
-    const xpaths_padding = [];
-    const css_padding = [];
-
-    // 需修改margin元素
-    const xpaths_margin = [];
-    const css_margin = [];
-
-    // 封装setTimeout
     function delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    function applyCSSStyles(element, cssText) {
+        const styles = cssText.split(';').filter(style => style.trim() !== '');
+
+        styles.forEach(style => {
+            const [property, value] = style.split(':').map(s => s.trim());
+            if (property && value) {
+                // 处理CSS自定义属性
+                if (property.startsWith('--')) {
+                    element.style.setProperty(property, value);
+                } else {
+                    // 转换CSS属性名到JS格式（如background-color -> backgroundColor）
+                    const jsProperty = property.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+                    element.style[jsProperty] = value;
+                }
+            }
+        });
+    }
+
     // 修改元素样式
     async function modifyElementStyles() {
-
-        // 隐藏元素
-        for (const xpath of xpaths_hide) {
+        // xpath方式
+        for (const xpath of xpaths_css) {
             if (xpath.sleep > 0) {
-                await delay(xpath.sleep); // 异步延迟
+                await delay(xpath.sleep);
             }
 
-            const element = document.evaluate(
-                xpath.key,
-                document,
-                null,
-                XPathResult.FIRST_ORDERED_NODE_TYPE,
-                null
-            ).singleNodeValue;
+            try {
+                const element = document.evaluate(
+                    xpath.key,
+                    document,
+                    null,
+                    XPathResult.FIRST_ORDERED_NODE_TYPE,
+                    null
+                ).singleNodeValue;
 
-            if (element) {
-                element.style.display = 'none';
-            } else {
-                console.error(`未找到目标元素：${xpath.key}`);
-            }
-        }
-
-        for (const css of css_hide) {
-            const element = document.querySelector(css.key);
-            if (element) {
-                element.style.display = 'none';
-            } else {
-                console.error(`未找到目标元素：${css.key}`);
-            }
-        }
-
-        // 修改width
-        for (const xpath of xpaths_width) {
-            if (xpath.sleep > 0) {
-                await delay(xpath.sleep); // 异步延迟
-            }
-
-            const element = document.evaluate(
-                xpath.key,
-                document,
-                null,
-                XPathResult.FIRST_ORDERED_NODE_TYPE,
-                null
-            ).singleNodeValue;
-
-            if (element) {
-                element.style.width = xpath.value;
-                element.style.maxWidth = xpath.value;
-            } else {
-                console.error(`未找到目标元素：${xpath.key}`);
-            }
-        }
-
-        for (const css of css_width) {
-            const element = document.querySelector(css.key);
-            if (element) {
-                element.style.width = '100%';
-                element.style.maxWidth = '100%';
-            } else {
-                console.error(`未找到目标元素：${css.key}`);
-            }
-        }
-
-        // 修改padding
-        for (const xpath of xpaths_padding) {
-            if (xpath.sleep > 0) {
-                await delay(xpath.sleep); // 异步延迟
-            }
-
-            const element = document.evaluate(
-                xpath.key,
-                document,
-                null,
-                XPathResult.FIRST_ORDERED_NODE_TYPE,
-                null
-            ).singleNodeValue;
-
-            if (element) {
-                element.style.padding = xpath.value;
-            } else {
-                console.error(`未找到目标元素：${xpath.key}`);
-            }
-        }
-
-        for (const css of css_padding) {
-            const element = document.querySelector(css.key);
-            if (element) {
-                element.style.padding = '0 0 0 0';
-            } else {
-                console.error(`未找到目标元素：${css.key}`);
-            }
-        }
-
-        // 修改margin
-        for (const xpath of xpaths_margin) {
-            if (xpath.sleep > 0) {
-                await delay(xpath.sleep); // 异步延迟
-            }
-
-            const element = document.evaluate(
-                xpath.key,
-                document,
-                null,
-                XPathResult.FIRST_ORDERED_NODE_TYPE,
-                null
-            ).singleNodeValue;
-
-            if (element) {
-                element.style.margin = xpath.value;
-            } else {
-                console.error(`未找到目标元素：${xpath.key}`);
-            }
-        }
-
-        for (const css of css_margin) {
-            const element = document.querySelector(css.key);
-            if (element) {
-                element.style.margin = '0 0 0 0';
-            } else {
-                console.error(`未找到目标元素：${css.key}`);
-            }
-        }
-
-        // 其他 - 暂时移除阅读模式
-        // readMode();
-    }
-
-    let isReadMode = false;
-
-    function resetMode() {
-        isReadMode = false;
-    }
-
-    // 阅读模式(输入框隐藏)
-    function readMode() {
-        if (isReadMode) {
-            return;
-        }
-
-        const xpath = "/html/body/div[1]/div/div[2]/div[3]/div/div[2]/div/div/div[3]";
-        const targetElement = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-
-        if (targetElement) {
-
-            // 元素位置计算
-            let elementTop, elementBottom, elementLeft, elementRight;
-            function updateElementPosition() {
-                const elementRect = targetElement.getBoundingClientRect();
-                elementTop = elementRect.top + window.scrollY; // 相对于文档顶部的位置
-                elementBottom = elementRect.bottom + window.scrollY; // 相对于文档底部的位置
-                elementLeft = elementRect.left + window.scrollX; // 相对于文档左侧的位置
-                elementRight = elementRect.right + window.scrollX; // 相对于文档右侧的位置
-            }
-
-            updateElementPosition();
-            window.addEventListener('scroll', updateElementPosition);
-            window.addEventListener('resize', updateElementPosition);
-
-            // 首次隐藏输入框
-            isReadMode = true;
-            targetElement.style.display = 'none';
-
-            // 鼠标移动
-            window.addEventListener('mousemove', function(event) {
-                const mouseX = event.clientX + window.scrollX;
-                const mouseY = event.clientY + window.scrollY;
-
-                // 判断鼠标是否在目标元素的范围内
-                if (
-                    mouseX >= elementLeft &&
-                    mouseX <= elementRight &&
-                    mouseY >= elementTop &&
-                    mouseY <= elementBottom
-                ) {
-                    targetElement.style.display = 'block';
+                if (element) {
+                    applyCSSStyles(element, xpath.value);
+                } else if (xpath.key) { // 只有key不为空时才报错
+                    console.error(`未找到XPath目标元素：${xpath.key}`);
                 }
-            });
+            } catch (e) {
+                console.error(`XPath查询错误：${xpath.key}`, e);
+            }
+        }
 
-            // 全局点击
-            document.addEventListener('click', function(event) {
-                // 如果点击的不是目标元素或其子元素
-                if (!targetElement.contains(event.target)) {
-                    targetElement.style.display = 'none';
+        // CSS方式
+        for (const css of css_css) {
+            if (css.sleep > 0) {
+                await delay(css.sleep);
+            }
+
+            try {
+                const elements = document.querySelectorAll(css.key);
+                if (elements.length > 0) {
+                    elements.forEach(element => {
+                        applyCSSStyles(element, css.value);
+                    });
+                } else if (css.key) { // 只有key不为空时才报错
+                    console.error(`未找到CSS目标元素：${css.key}`);
                 }
-            });
-
-        } else {
-            console.error(`未找到目标元素：${xpath}`);
+            } catch (e) {
+                console.error(`CSS查询错误：${css.key}`, e);
+            }
         }
     }
 
     // 监听URL变化
     function observeUrlChanges() {
         let lastUrl = location.href;
-        window.addEventListener('popstate', function () {
+
+        const urlChangeHandler = function() {
             if (location.href !== lastUrl) {
                 lastUrl = location.href;
                 modifyElementStyles();
-                resetMode();
             }
-        });
-        window.addEventListener('hashchange', function () {
-            if (location.href !== lastUrl) {
-                lastUrl = location.href;
-                modifyElementStyles();
-                resetMode();
-            }
-        });
+        };
+
+        window.addEventListener('popstate', urlChangeHandler);
+        window.addEventListener('hashchange', urlChangeHandler);
+
         const originalPushState = history.pushState;
         const originalReplaceState = history.replaceState;
 
-        history.pushState = function () {
+        history.pushState = function() {
             originalPushState.apply(this, arguments);
-            if (location.href !== lastUrl) {
-                lastUrl = location.href;
-                modifyElementStyles();
-                resetMode();
-            }
+            urlChangeHandler();
         };
 
-        history.replaceState = function () {
+        history.replaceState = function() {
             originalReplaceState.apply(this, arguments);
-            if (location.href !== lastUrl) {
-                lastUrl = location.href;
-                modifyElementStyles();
-                resetMode();
-            }
+            urlChangeHandler();
         };
     }
 
-    // 页面加载时执行一次
-    window.addEventListener('load', function () {
+    // 页面加载时执行
+    function init() {
         modifyElementStyles();
         observeUrlChanges();
-        resetMode();
-    });
 
-    // DOM加载完成后执行一次
-    document.addEventListener('DOMContentLoaded', function () {
-        modifyElementStyles();
-        resetMode();
-    });
+        // 监听DOM变化
+        const observer = new MutationObserver(function(mutations) {
+            const shouldUpdate = mutations.some(mutation => {
+                return Array.from(mutation.addedNodes).some(node => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        return css_css.some(css => node.matches(css.key) || node.querySelector(css_css.map(c => c.key).join(',')));
+                    }
+                    return false;
+                });
+            });
 
-    const observer = new MutationObserver(function () {
-        modifyElementStyles();
-    });
+            if (shouldUpdate) {
+                modifyElementStyles();
+            }
+        });
 
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-    });
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+
+    // 根据页面加载状态决定如何初始化
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        setTimeout(init, 0);
+    } else {
+        document.addEventListener('DOMContentLoaded', init);
+        window.addEventListener('load', init);
+    }
 })();
