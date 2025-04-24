@@ -80,7 +80,7 @@
 
                 if (element) {
                     applyCSSStyles(element, xpath.value);
-                } else if (xpath.key) { // 只有key不为空时才报错
+                } else if (xpath.key) {
                     console.error(`未找到XPath目标元素：${xpath.key}`);
                 }
             } catch (e) {
@@ -100,7 +100,7 @@
                     elements.forEach(element => {
                         applyCSSStyles(element, css.value);
                     });
-                } else if (css.key) { // 只有key不为空时才报错
+                } else if (css.key) {
                     console.error(`未找到CSS目标元素：${css.key}`);
                 }
             } catch (e) {
