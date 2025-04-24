@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name              KeepChatGPT
 // @description       这是一款提高ChatGPT的数据安全能力和效率的插件。并且免费共享大量创新功能，如：自动刷新、保持活跃、数据安全、取消审计、克隆对话、言无不尽、净化页面、展示大屏、拦截跟踪、日新月异、明察秋毫等。让我们的AI体验无比安全、顺畅、丝滑、高效、简洁。
-// @version           30.2
+// @version           31.4
 // @author            xcanwin
 // @namespace         https://github.com/xcanwin/KeepChatGPT/
 // @supportURL        https://github.com/xcanwin/KeepChatGPT/
@@ -55,6 +55,7 @@
 // @grant             GM_setValue
 // @grant             GM_getValue
 // @grant             GM_xmlhttpRequest
+// @grant             GM_cookie
 // @grant             unsafeWindow
 // @run-at            document-body
 // @noframes
@@ -401,9 +402,9 @@
     const ndialog = function(title = 'KeepChatGPT', content = '', buttonvalue = 'OK', buttonfun = function(t) {return t;}, inputtype = 'br', inputvalue = '') {
         const ndivalert = document.createElement('div');
         ndivalert.innerHTML = `
-<div class="fixed inset-0 bg-black/50 dark:bg-gray-600/70">
-  <div class="grid-cols-[10px_1fr_10px] grid h-full w-full grid-rows-[minmax(10px,_1fr)_auto_minmax(10px,_1fr)] md:grid-rows-[minmax(20px,_1fr)_auto_minmax(20px,_1fr)] overflow-y-auto">
-    <div class="relative col-auto col-start-2 row-auto row-start-2 w-full rounded-xl text-left shadow-xl transition-all left-1/2 -translate-x-1/2  bg-token-main-surface-primary max-w-lg xl:max-w-xl">
+<div class="fixed inset-0 z-50 bg-black/50 dark:bg-black/80">
+  <div class="z-50 h-full w-full overflow-y-auto grid grid-cols-[10px_1fr_10px] grid-rows-[minmax(10px,1fr)_auto_minmax(10px,1fr)] md:grid-rows-[minmax(20px,1fr)_auto_minmax(20px,1fr)]">
+    <div class="popover bg-token-main-surface-primary relative start-1/2 col-auto col-start-2 row-auto row-start-2 h-full w-full text-start ltr:-translate-x-1/2 rtl:translate-x-1/2 rounded-2xl shadow-xl flex flex-col focus:outline-hidden overflow-hidden max-w-xl">
       <div class="px-4 pb-4 pt-5 sm:p-6 flex items-center justify-between border-b border-black/10 dark:border-white/10">
         <h2 class="text-lg leading-6 dark:text-gray-200">${title}</h2>
       </div>
@@ -686,15 +687,15 @@
         }
 
         //检查更新：首次、每3天
-        if (gv("k_lastupdate", 0) === 0 || Date.now() - gv("k_lastupdate", 0) >= 1000 * 60 * 60 * 24 * 3) {
-            sv("k_lastupdate", Date.now());
-            checkForUpdates("auto");
-        }
-
-        if (gv("k_last_support_author", 0) === 0 || Date.now() - gv("k_last_support_author", 0) >= 1000 * 60 * 60 * 24 * 30) {
-            sv("k_last_support_author", Date.now());
-            supportAuthor();
-        }
+        // if (gv("k_lastupdate", 0) === 0 || Date.now() - gv("k_lastupdate", 0) >= 1000 * 60 * 60 * 24 * 3) {
+        //     sv("k_lastupdate", Date.now());
+        //     checkForUpdates("auto");
+        // }
+        //
+        // if (gv("k_last_support_author", 0) === 0 || Date.now() - gv("k_last_support_author", 0) >= 1000 * 60 * 60 * 24 * 30) {
+        //     sv("k_last_support_author", Date.now());
+        //     supportAuthor();
+        // }
     };
 
     const toggleMenu = function(action) {
@@ -967,8 +968,8 @@
     main div[data-message-author-role="user"] {
         padding-right: 3rem;
     }
-    main div[data-message-author-role="user"]>div.w-full>div {
-        background-color: #deedd7;
+    main div[data-message-author-role="user"]>div.w-full>div>div {
+        background-color: #e1eaff;
     }
 
     /*添加用户头像*/
@@ -1011,7 +1012,7 @@
 /*官方暗色模式*/
 .dark {
     .kkeenobservation {
-        main div[data-message-author-role="user"]>div.w-full>div {
+        main div[data-message-author-role="user"]>div.w-full>div>div {
             background-color: #525452;
         }
     }
@@ -1055,9 +1056,6 @@ nav div.pt-3\\.5 {
             max-width: 85%;
             margin: auto;
         }
-    }
-    img {
-        width: 653px;
     }
 }
 
@@ -1473,7 +1471,19 @@ nav.flex .transition-all {
         }
     };
 
+    /*
+    绕过一部分CF机器人校验
+    */
+    const byebyeCF = () => {
+        GM_cookie.delete({
+            name: "cf_clearance",
+            domain: ".chatgpt.com",
+            path: "/"
+        });
+    };
+
     const nInterval1Fun = function() {
+        byebyeCF();
         if ($(symbol1_selector) || $(symbol2_selector)) {
             setIfr();
             speakCompletely();
