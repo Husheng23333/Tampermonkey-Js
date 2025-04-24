@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeepSeek大屏优化
 // @namespace    http://tampermonkey.net/
-// @version      2.0.1
+// @version      2.3.0
 // @description  优化DeepSeek页面样式
 // @author       HuSheng
 // @match        https://chat.deepseek.com/**
@@ -13,19 +13,20 @@
     'use strict';
 
     // 需隐藏元素
-    const xpaths_hide = [
-        {key: '/html/body/div[1]/div/div[2]/div[1]/div[1]/div[4]/div[1]', value: '', sleep: 0},
-        {key: '/html/body/div[1]/div/div[2]/div[1]/div[1]/div[2]', value: '', sleep: 0},
+    const xpaths_hide = [];
+    const css_hide = [
+        {key: '.ebaea5d2', value: '', sleep: 0},
+        {key: '.a1e75851', value: '', sleep: 0},
+        {key: '._2be88ba', value: '', sleep: 0},
     ];
-    const css_hide = [];
 
     // 需修改width元素
-    const xpaths_width = [
-        {key: '/html/body/div[1]/div/div[2]/div[3]/div/div[2]/div/div/div[1]', value: '100%', sleep: 0},
-        {key: '/html/body/div[1]/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div[1]', value: '100%', sleep: 0},
-        {key: '/html/body/div[1]/div/div[2]/div[3]/div/div/div[2]', value: '100%', sleep: 0},
+    const xpaths_width = [];
+    const css_width = [
+        {key: '._9a2f8e4', value: '100%', sleep: 0},
+        {key: '.dad65929', value: '100%', sleep: 0},
+        {key: '.aaff8b8f', value: '100%', sleep: 0},
     ];
-    const css_width = [];
 
     // 需修改padding元素
     const xpaths_padding = [];
@@ -65,11 +66,11 @@
         }
 
         for (const css of css_hide) {
-            const element = document.querySelector(css);
+            const element = document.querySelector(css.key);
             if (element) {
                 element.style.display = 'none';
             } else {
-                console.error(`未找到目标元素：${css}`);
+                console.error(`未找到目标元素：${css.key}`);
             }
         }
 
@@ -96,12 +97,12 @@
         }
 
         for (const css of css_width) {
-            const element = document.querySelector(css);
+            const element = document.querySelector(css.key);
             if (element) {
                 element.style.width = '100%';
                 element.style.maxWidth = '100%';
             } else {
-                console.error(`未找到目标元素：${css}`);
+                console.error(`未找到目标元素：${css.key}`);
             }
         }
 
@@ -127,11 +128,11 @@
         }
 
         for (const css of css_padding) {
-            const element = document.querySelector(css);
+            const element = document.querySelector(css.key);
             if (element) {
                 element.style.padding = '0 0 0 0';
             } else {
-                console.error(`未找到目标元素：${css}`);
+                console.error(`未找到目标元素：${css.key}`);
             }
         }
 
@@ -157,16 +158,16 @@
         }
 
         for (const css of css_margin) {
-            const element = document.querySelector(css);
+            const element = document.querySelector(css.key);
             if (element) {
                 element.style.margin = '0 0 0 0';
             } else {
-                console.error(`未找到目标元素：${css}`);
+                console.error(`未找到目标元素：${css.key}`);
             }
         }
 
-        // 其他
-        readMode();
+        // 其他 - 暂时移除阅读模式
+        // readMode();
     }
 
     let isReadMode = false;
