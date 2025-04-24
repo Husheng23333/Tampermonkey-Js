@@ -13,20 +13,29 @@
     'use strict';
 
     // xpath选择器修改
-    const xpaths_css = [];
+    const xpaths_css = [
+        {key: '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]', value: 'display: none', sleep: 0},
+        {key: '/html/body/div[1]/div/div/div[2]/div[1]/div/div[4]/div[1]', value: 'display: none', sleep: 0},
+
+        {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div/div[2]', value: 'width: 100%; max-width: 100%', sleep: 0},
+        {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div[2]/div/div/div[1]', value: 'width: 100%; max-width: 100%', sleep: 0},
+        {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div[1]', value: 'width: 80%; max-width: 1000px', sleep: 0},
+
+        {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div[1]/div/div/div[1]/div', value: 'min-height: 30px', sleep: 0},
+        {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div[1]', value: 'width: 100%; max-width: 100%;', sleep: 0},
+    ];
 
     // CSS选择器修改
     const css_css = [
-        {key: '.ebaea5d2', value: 'display: none', sleep: 0},
-        {key: '.a1e75851', value: 'display: none', sleep: 0},
-        {key: '._2be88ba', value: 'display: none', sleep: 0},
-
-        {key: '._9a2f8e4', value: 'width: 100%; max-width: 100%', sleep: 0},
-        {key: '.dad65929', value: 'width: 100%; max-width: 100%', sleep: 0},
-        {key: '._9a2f8e4 .aaff8b8f', value: 'width: 80%; max-width: 1000px', sleep: 0},
-
-        {key: '._8f60047 .b13855df', value: 'min-height: 30px', sleep: 0},
-        {key: '._8f60047 .aaff8b8f', value: 'width: 90%; max-width: 100%', sleep: 0},
+        // {key: '.ebaea5d2', value: 'display: none', sleep: 0},
+        // {key: '.a1e75851', value: 'display: none', sleep: 0},
+        //
+        // {key: '._9a2f8e4', value: 'width: 100%; max-width: 100%', sleep: 0},
+        // {key: '.dad65929', value: 'width: 100%; max-width: 100%', sleep: 0},
+        // {key: '._9a2f8e4 .aaff8b8f', value: 'width: 80%; max-width: 1000px', sleep: 0},
+        //
+        // {key: '._8f60047 .b13855df', value: 'min-height: 30px', sleep: 0},
+        // {key: '._8f60047 .aaff8b8f', value: 'width: 100%; max-width: 100%', sleep: 0},
     ];
 
 
@@ -136,12 +145,7 @@
         // 监听DOM变化
         const observer = new MutationObserver(function(mutations) {
             const shouldUpdate = mutations.some(mutation => {
-                return Array.from(mutation.addedNodes).some(node => {
-                    if (node.nodeType === Node.ELEMENT_NODE) {
-                        return css_css.some(css => node.matches(css.key) || node.querySelector(css_css.map(c => c.key).join(',')));
-                    }
-                    return false;
-                });
+                return true;
             });
 
             if (shouldUpdate) {
