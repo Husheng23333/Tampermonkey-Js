@@ -739,10 +739,12 @@
 
         const ndivkcg = document.createElement("div");
         ndivkcg.id = "kcg";
-        ndivkcg.setAttribute("class", "flex py-3 px-3 items-center gap-3 rounded-md text-sm mb-1 flex-shrink-0 border border-white/20");
+        // 这里移除了border-white/20属性 和 border属性
+        ndivkcg.setAttribute("class", "flex py-3 px-3 items-center gap-3 rounded-md text-sm mb-1 flex-shrink-0");
 
         const icon = GM_info.script.icon ? GM_info.script.icon : `${GM_info.script.namespace}raw/main/assets/logo.svg`;
-        ndivkcg._symbol1_innerHTML = `<img src='${icon}' style='width: 1rem;' />Keep${ndivkcg.id.slice(1,2).toUpperCase()}hatGPT by x${ndivkcg.id.slice(1,2)}anwin`;
+        // 这里改为了ndivkcg._symbol1_innerHTML = `KeepChatGPT`;
+        ndivkcg._symbol1_innerHTML = `KeepChatGPT`;
         ndivkcg._symbol2_innerHTML = `<img src='${icon}' style='width: 1rem;' />`;
 
         if ($(symbol1_selector)) {
