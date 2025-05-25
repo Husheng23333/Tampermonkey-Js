@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name              KeepChatGPT
 // @description       这是一款提高ChatGPT的数据安全能力和效率的插件。并且免费共享大量创新功能，如：自动刷新、保持活跃、数据安全、取消审计、克隆对话、言无不尽、净化页面、展示大屏、拦截跟踪、日新月异、明察秋毫等。让我们的AI体验无比安全、顺畅、丝滑、高效、简洁。
-// @version           31.4
+// @version           31.10
 // @author            xcanwin
 // @namespace         https://github.com/xcanwin/KeepChatGPT/
 // @supportURL        https://github.com/xcanwin/KeepChatGPT/
@@ -56,6 +56,7 @@
 // @grant             GM_getValue
 // @grant             GM_xmlhttpRequest
 // @grant             GM_cookie
+// @grant             GM_info
 // @grant             unsafeWindow
 // @run-at            document-body
 // @noframes
@@ -771,7 +772,8 @@
     const addStyle = function() {
         GM_addStyle(`
 :root {
-    --keenobservation-background-image-url: '';
+    --keenobservation-user-image-url: '';
+    --keenobservation-assistant-image-url: '';
 }
 
 /*日星月异*/
@@ -808,17 +810,11 @@
         background-color: #d5ddff;
     }
 
-    /*左边栏新聊天*/
-    nav .sticky.bg-token-sidebar-surface-primary {
-        background-color: unset !important;
-    }
-
-    /*左边栏分类*/
-    nav.flex div.overflow-y-auto .juice\\:sticky  {
-        background-color: unset !important;
-    }
-    nav.flex div.overflow-y-auto .relative.mt-5 {
-        margin-top: 0;
+    /*左边栏时间分类*/
+    @layer utilities {
+        .bg-token-bg-elevated-secondary {
+            background-color: unset !important;
+        }
     }
 
     /*左边栏日期*/
@@ -836,7 +832,7 @@
         }
         nav.flex li>div {
             height: 3.5rem;
-            background-color: rgba(111, 111, 111, 0.1);
+            background-color: rgba(111, 111, 111, 0.25);
         }
         nav.flex li>div>a {
             mask-image: unset !important;
@@ -859,7 +855,11 @@
         }
 
         nav.flex li a .navtitle {
-            color: #e1e1e1 !important;
+            color: #f4f4f4 !important;
+        }
+
+        nav.flex li a .navlast {
+            color: #d0d0d0 !important;
         }
     }
 }
@@ -970,7 +970,7 @@
     main div[data-message-author-role="user"] {
         padding-right: 3rem;
     }
-    main div[data-message-author-role="user"]>div.w-full>div>div {
+    main div[data-message-author-role="user"]>div.w-full>div {
         background-color: #e1eaff;
     }
 
@@ -982,7 +982,7 @@
         width: 2rem;
         height: 2rem;
         background-color: gray;
-        background-image: var(--keenobservation-background-image-url);
+        background-image: var(--keenobservation-user-image-url);
         background-size: contain;
         border-radius: 50%;
         pointer-events: auto;
@@ -995,10 +995,12 @@
 
     /*机器人气泡优化*/
     main div[data-message-author-role="assistant"] {
+        padding-left: 3.5rem;
         padding-right: 3.5rem;
     }
     main div[data-message-author-role="assistant"]>div.w-full {
         align-items: flex-start;
+        padding-top: 0;
     }
     main div[data-message-author-role="assistant"]>div.w-full>div {
         width: auto;
@@ -1010,11 +1012,25 @@
         padding-right: 1.25rem;
         background-color: var(--main-surface-secondary);
     }
+
+    /*添加机器人头像*/
+    main div[data-message-author-role="assistant"]::after {
+        content: '';
+        position: absolute;
+        left: 0rem;
+        width: 2rem;
+        height: 2rem;
+        background-color: gray;
+        background-image: var(--keenobservation-assistant-image-url);
+        background-size: contain;
+        border-radius: 50%;
+        pointer-events: auto;
+    }
 }
 /*官方暗色模式*/
 .dark {
     .kkeenobservation {
-        main div[data-message-author-role="user"]>div.w-full>div>div {
+        main div[data-message-author-role="user"]>div.w-full>div {
             background-color: #525452;
         }
     }
@@ -1103,8 +1119,15 @@ nav.flex .transition-all {
     const hookFetch = function() {
         unsafeWindow.fetch = new Proxy(fetch, {
             apply: function (target, thisArg, argumentsList) {
-                const fetchReqUrl = argumentsList[0];
-                const fetchReqOptions = argumentsList[1];
+                let fetchReqUrl = '';
+                let fetchReqOptions = {};
+                if (typeof argumentsList[0] === 'string') {
+                    fetchReqUrl = argumentsList[0];
+                    fetchReqOptions = argumentsList[1];
+                } else if (argumentsList[0] instanceof Request) {
+                    fetchReqOptions = argumentsList[0];
+                    fetchReqUrl = fetchReqOptions?.url;
+                }
                 const fetchReqMethod = fetchReqOptions?.method?.toUpperCase();
                 let fetchRsp;
                 try {
@@ -1142,7 +1165,8 @@ nav.flex .transition-all {
                             let fetchRspBodyNew = fetchRspBody;
                             if (fetchRspBodyNew !== "{}"){ //当前已登录
                                 let modifiedData = JSON.parse(fetchRspBody);
-                                document.documentElement.style.setProperty('--keenobservation-background-image-url', `url('${modifiedData.picture}')`); //更新明察秋毫头像
+                                document.documentElement.style.setProperty('--keenobservation-user-image-url', `url('${modifiedData.picture}')`); //更新明察秋毫用户头像
+                                document.documentElement.style.setProperty('--keenobservation-assistant-image-url', `url('https://cdn.oaistatic.com/assets/favicon-180x180-od45eci6.webp')`); //更新明察秋毫机器人头像
                                 if (!global.st_ec) {
                                     const email = modifiedData.email;
                                     global.st_ec = new IndexedDB(`KeepChatGPT_${email}`, 'conversations');
@@ -1169,8 +1193,9 @@ nav.flex .transition-all {
                             }, 1000);//有点bug
                             return Promise.resolve(new Response(fetchRspBodyNew, {status: response.status, statusText: response.statusText, headers: response.headers}));
                         });
-                    } else if (gv("k_everchanging", false) === true && fetchReqUrl.match('/backend-api/conversation/(.*?)(\\?|$)')) {
+                    } else if (gv("k_everchanging", false) === true && fetchReqUrl.match('/backend-api/conversation/(([^/]{4,}?){4}-[^/]{4,}?)(\\?|$)(\\?|$)')) {
                         //点击/编辑/删除侧边栏的历史对话时，更新数据库：当前id、当前标题、当前更新时间，当前last，当前model。同时更新侧边栏
+
                         return response.text().then(async fetchRspBody => {
                             let fetchRspBodyNew = fetchRspBody;
                             if (fetchReqMethod === 'GET') {
@@ -1182,8 +1207,8 @@ nav.flex .transition-all {
                                 crt_con_update_time = crt_con_update_time < 10**10 ? crt_con_update_time * 1000 : crt_con_update_time;
                                 crt_con_update_time = new Date(crt_con_update_time);
                                 const crt_con_speak_last_keys = f && f.mapping && Object.keys(f.mapping);
-                                const crt_con_speak_last_id = crt_con_speak_last_keys[crt_con_speak_last_keys.length - 1]
-                                const crt_con_speak_last = f.mapping[crt_con_speak_last_id].message
+                                const crt_con_speak_last_id = f.current_node;
+                                const crt_con_speak_last = f.mapping[crt_con_speak_last_id].message;
                                 const crt_con_last = crt_con_speak_last.content.parts[0].trim().replace(/[\r\n]/g, ``).substr(0, 100);
                                 const crt_con_model = crt_con_speak_last.metadata.model_slug;
                                 await global.st_ec.put({id: crt_con_id, title: crt_con_title, update_time: crt_con_update_time, last: crt_con_last, model: crt_con_model});
@@ -1195,7 +1220,7 @@ nav.flex .transition-all {
                             } else if (fetchReqMethod === 'PATCH') {
                                 //删除历史对话
                                 const f = JSON.parse(fetchRspBody);
-                                const crt_con_id = fetchReqUrl.match('/backend-api/conversation/(.*?)(\\?|$)')[1];
+                                const crt_con_id = fetchReqUrl.match('/backend-api/conversation/(([^/]{4,}?){4}-[^/]{4,}?)(\\?|$)')[1];
                                 const crt_con_title = f && f.title;
                                 const is_visible = f && f.is_visible;
                                 if (is_visible) {
@@ -1228,7 +1253,7 @@ nav.flex .transition-all {
     const attachDate = function(kec_object) {
         $$('nav.flex li a').forEach(async el => {
             let a_id;
-            const a_id_m = el.href.match('/([^/]{4,}?-.{4,}?-.{4,}?-.{4,}?-.{4,}?)(\\?|$)');
+            const a_id_m = el.href.match('/(([^/]{4,}?){4}-[^/]{4,}?)(\\?|$)(\\?|$)');
             if (a_id_m) {
                 a_id = a_id_m[1];
             } else {
@@ -1238,7 +1263,11 @@ nav.flex .transition-all {
             if (kec_object) {
                 kec_obj_el = kec_object[a_id];
             } else {
-                kec_obj_el = await global.st_ec.get(a_id);
+                if (global.st_ec) {
+                    kec_obj_el = await global.st_ec.get(a_id);
+                } else {
+                    kec_obj_el = {};
+                }
             }
             const title = kec_obj_el && kec_obj_el.title || "";
             const update_time = kec_obj_el && kec_obj_el.update_time || "";
