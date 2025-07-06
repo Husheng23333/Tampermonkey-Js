@@ -12,8 +12,8 @@
 // @grant        none
 // @run-at       document-body
 // @license       GPL-2.0-only
-// @downloadURL   https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/POE%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
-// @updateURL     https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/POE%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
+// @downloadURL   https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/DeepSeek%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
+// @updateURL     https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/DeepSeek%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
 // ==/UserScript==
 
 (function () {
