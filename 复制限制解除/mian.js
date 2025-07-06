@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         复制限制解除
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  恢复被网站禁用的复制功能，例如飞书、钉钉、百度文库等。支持右键菜单复制，支持ctrl+c、command+c复制
 // @author       HuSheng
 // @match        *://*/*
@@ -15,6 +15,7 @@
 (function() {
     'use strict';
 
+    // 原始事件
     const originalAddEventListener = EventTarget.prototype.addEventListener;
     const originalPreventDefault = Event.prototype.preventDefault;
     const originalStopPropagation = Event.prototype.stopPropagation;
@@ -22,8 +23,20 @@
 
     // 覆盖addEventListener
     EventTarget.prototype.addEventListener = function(type, listener, options) {
-        if (type === 'copy' || type === 'keydown') {
+        if (type === 'copy') {
             return;
+        }
+
+        // 拦截Ctrl+C、Command+C
+        if (type === 'keydown') {
+            const listenerStr = listener.toString();
+            if (listenerStr.includes('keyCode:67') ||
+                listenerStr.includes('keyCode===67') ||
+                listenerStr.includes('key:"c"') ||
+                (listenerStr.includes('ctrlKey') && listenerStr.includes('67')) ||
+                (listenerStr.includes('metaKey') && listenerStr.includes('67'))) {
+                return;
+            }
         }
         originalAddEventListener.call(this, type, listener, options);
     };
