@@ -8,8 +8,8 @@
 // @grant        none
 // @run-at       document-start
 // @license      GPL-2.0-only
-// @downloadURL  https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/%E5%BC%BA%E5%88%B6%E5%A4%8D%E5%88%B6/mian.js
-// @updateURL    https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/%E5%BC%BA%E5%88%B6%E5%A4%8D%E5%88%B6/mian.js
+// @downloadURL  https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/%E5%A4%8D%E5%88%B6%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4/mian.js
+// @updateURL    https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/%E5%A4%8D%E5%88%B6%E9%99%90%E5%88%B6%E8%A7%A3%E9%99%A4/mian.js
 // ==/UserScript==
 
 (function() {
