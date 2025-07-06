@@ -7,12 +7,16 @@
 // @match        https://poe.com/**
 // @icon         https://psc2.cf2.poecdn.net/assets/favicon.svg
 // @grant        none
+// @run-at       document-body
+// @license      GPL-2.0-only
+// @downloadURL  https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/POE%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
+// @updateURL    https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/POE%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
 // ==/UserScript==
 
 (function () {
     'use strict';
 
-    // 定义所有需要添加的CSS规则
+    // CSS规则
     const cssRules = `
         /* 净化大屏 */
         .InfiniteScroll_container__PHsd4:not(.InfiniteScroll_horizontal__i7SXE) {
@@ -89,7 +93,7 @@
         };
     }
 
-    // 页面加载时执行一次
+    // 页面加载时执行
     window.addEventListener('load', function () {
         applyStyles();
         observeUrlChanges();
