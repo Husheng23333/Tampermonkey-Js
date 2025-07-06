@@ -5,14 +5,21 @@
 // @description  优化DeepSeek页面样式
 // @author       HuSheng
 // @match        https://chat.deepseek.com/**
+// @exclude      https://chat.deepseek.com/sign_in
+// @exclude      https://chat.deepseek.com/sign_up
+// @exclude      https://chat.deepseek.com/forgot_password
 // @icon         https://chat.deepseek.com/favicon.svg
 // @grant        none
+// @run-at       document-body
+// @license       GPL-2.0-only
+// @downloadURL   https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/POE%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
+// @updateURL     https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/POE%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
 // ==/UserScript==
 
 (function () {
     'use strict';
 
-    // xpath选择器修改
+    // xpath
     const xpaths_css = [
         {key: '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]', value: 'display: none', sleep: 0},
         {key: '/html/body/div[1]/div/div/div[2]/div[1]/div/div[4]/div[1]', value: 'display: none', sleep: 0},
@@ -25,7 +32,7 @@
         {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div[1]', value: 'width: 100%; max-width: 100%;', sleep: 0},
     ];
 
-    // CSS选择器修改
+    // CSS
     const css_css = [
         // {key: '.ebaea5d2', value: 'display: none', sleep: 0},
         // {key: '.a1e75851', value: 'display: none', sleep: 0},
@@ -142,7 +149,6 @@
         modifyElementStyles();
         observeUrlChanges();
 
-        // 监听DOM变化
         const observer = new MutationObserver(function(mutations) {
             const shouldUpdate = mutations.some(mutation => {
                 return true;
@@ -159,7 +165,6 @@
         });
     }
 
-    // 根据页面加载状态决定如何初始化
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
         setTimeout(init, 0);
     } else {
