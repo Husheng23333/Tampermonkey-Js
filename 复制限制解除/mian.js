@@ -2,7 +2,7 @@
 // @name         复制限制解除
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  恢复被网站禁用的复制功能，例如飞书、钉钉等，支持右键菜单复制
+// @description  恢复被网站禁用的复制功能，例如飞书、钉钉、百度文库等。支持右键菜单复制，支持ctrl+c、command+c复制
 // @author       HuSheng
 // @match        *://*/*
 // @grant        none
