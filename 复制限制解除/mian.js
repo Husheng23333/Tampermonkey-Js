@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         复制限制解除
+// @name         为什么不让我复制？（解除如飞书、钉钉、百度文库等的复制限制）
 // @namespace    http://tampermonkey.net/
 // @version      1.1
 // @description  恢复被网站禁用的复制功能，例如飞书、钉钉、百度文库等。支持右键菜单复制，支持ctrl+c、command+c复制
