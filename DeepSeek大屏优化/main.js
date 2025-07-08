@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DeepSeek大屏优化
 // @namespace    http://tampermonkey.net/
-// @version      2.4.0
+// @version      2.4.1
 // @description  优化DeepSeek页面样式
 // @author       HuSheng
 // @match        https://chat.deepseek.com/**
@@ -26,7 +26,7 @@
 
         {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div/div[2]', value: 'width: 100%; max-width: 100%', sleep: 0},
         {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div[2]/div/div/div[1]', value: 'width: 100%; max-width: 100%', sleep: 0},
-        {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div/div[2]/div[2]', value: 'width: 100%; max-width: 1200px', sleep: 0},
+        {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div/div[2]/div[2]', value: 'width: 90%; max-width: 1200px', sleep: 0},
 
         {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div[1]/div/div/div[1]/div', value: 'min-height: 30px', sleep: 0},
         {key: '/html/body/div[1]/div/div/div[2]/div[3]/div/div[2]/div/div/div[3]/div[1]', value: 'width: 100%; max-width: 100%;', sleep: 0},
