@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name              KeepChatGPT
 // @description       这是一款提高ChatGPT的数据安全能力和效率的插件。并且免费共享大量创新功能，如：自动刷新、保持活跃、数据安全、取消审计、克隆对话、言无不尽、净化页面、展示大屏、拦截跟踪、日新月异、明察秋毫等。让我们的AI体验无比安全、顺畅、丝滑、高效、简洁。
-// @version           31.10
+// @version           31.18
 // @author            xcanwin
 // @namespace         https://github.com/xcanwin/KeepChatGPT/
 // @supportURL        https://github.com/xcanwin/KeepChatGPT/
@@ -42,9 +42,9 @@
 // @description:zh-TW 这是一款提高ChatGPT的資料安全能力和效率的插件。並且免費共享大量創新功能，如：自動刷新、保持活躍、資料安全、取消審計、克隆對話、言無不盡、淨化頁面、展示大屏、攔截跟蹤、日新月異、明察秋毫等。讓我們的AI體驗無比安全、順暢、絲滑、高效、簡潔。
 // @icon              data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDUiIGhlaWdodD0iNDUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogPCEtLSBDcmVhdGVkIHdpdGggTWV0aG9kIERyYXcgLSBodHRwOi8vZ2l0aHViLmNvbS9kdW9waXhlbC9NZXRob2QtRHJhdy8gLS0+CiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQ3IiB3aWR0aD0iNDciIHk9Ii0xIiB4PSItMSIvPgogIDxnIGRpc3BsYXk9Im5vbmUiIG92ZXJmbG93PSJ2aXNpYmxlIiB5PSIwIiB4PSIwIiBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIiBpZD0iY2FudmFzR3JpZCI+CiAgIDxyZWN0IGZpbGw9InVybCgjZ3JpZHBhdHRlcm4pIiBzdHJva2Utd2lkdGg9IjAiIHk9IjAiIHg9IjAiIGhlaWdodD0iMTAwJSIgd2lkdGg9IjEwMCUiLz4KICA8L2c+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPGltYWdlIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQzBBQUFBdENBTUFBQUFOeEJLb0FBQUFObEJNVkVVQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQ0FnSUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFCTHIweWtBQUFBRVhSU1RsTUFJdmZqMXFNNGxHZUN6YnhJZHhXd1ZFcUlTSmdBQUFFdlNVUkJWRWpIemRUYmJvVWdFSVhobVFGQkRoN1crNzlzRWNNR2JOR20yVTM3M2ZySHhHVXlWRVNQRVIvcFlzR2RoVG9NUVBUWEJBQlR5d0dLNld1c3JpKzN3RVFqRTJEL29MWlRaUjlyUVNWdnJ1ZFdyZi9wZ2pNZ094ZDA0R0lYWUtiV0trZ2tnemdpY29KS3JkU0pnb1lsaXpZMmRNSFc2NU1Db0k5R243eGx1ckhoc05FM1RXZ21lbWJieVo1RmVpTysxN2RCY0VkQzIzczg4WmRyb201MEY4VUF3alRHQXBpdVhtbHNiZXZuZC8rd1RtZUR1ZFRHMlptcTJUcFRhdVpVRWdCVGFvZEVjNzJXaVN1MUFkRFdPekpOSjQxc0g5UWJFQllCek90amxnQnNnem9BOW5nUWN4MEJZUXVFUWIwZ2s3V01uQzF0N1p4N2JlSnhtT3ZWU1B4cmsxVDJlenV2UXFRaUJ1Vnp3TC80TCtsVGJYak1kRFVEa0JHY3VMODM5eVpxT0syR3RGYmFVZllCQzNzbUVVWHJITThBQUFBQVNVVk9SSzVDWUlJPSIgaWQ9InN2Z18xIiBoZWlnaHQ9IjQ1IiB3aWR0aD0iNDUiIHk9IjAiIHg9IjAiLz4KIDwvZz4KPC9zdmc+
 // @license           GPL-2.0-only
-// @match             *://chat.openai.com
+// @match             *://chat.openai.com/
 // @match             *://chat.openai.com/*
-// @match             *://chatgpt.com
+// @match             *://chatgpt.com/
 // @match             *://chatgpt.com/*
 // @connect           raw.githubusercontent.com
 // @connect           update.greasyfork.org
@@ -670,7 +670,7 @@
 
         if (gv("k_largescreen", false) === true) {
             $('#nmenuid_ls .checkbutton').classList.add('checked');
-            $("main.w-full").classList.toggle('largescreen');
+            $("main.w-full").classList.add('largescreen');
         }
 
         if (gv("k_speakcompletely", false) === true) {
@@ -702,13 +702,13 @@
     const toggleMenu = function(action) {
         const ndivmenu = $(".kmenu");
         if (action === "show") {
-            ndivmenu.classList.remove('hide');
+            ndivmenu.classList.remove('khide');
             if ($("#kcg")) {
                 ndivmenu.style.left = `${$("#kcg").getBoundingClientRect().right + 20}px`;
                 ndivmenu.style.top = `${$("#kcg").getBoundingClientRect().top}px`;
             }
         } else {
-            ndivmenu.classList.add('hide');
+            ndivmenu.classList.add('khide');
         }
     };
 
@@ -717,25 +717,6 @@
         if ($("#kcg") !== null) {
             return;
         }
-        var kcg_html;
-        if (kcg_html !== undefined) {
-            if ($(symbol1_selector)) {
-                kcg_html.innerHTML = kcg_html._symbol1_innerHTML;
-                kcg_html.classList.add('kcg-pc');
-                kcg_html.classList.remove('kcg-mb');
-                symbol_prt = $(symbol1_selector);
-            } else if ($(symbol2_selector)) {
-                kcg_html.innerHTML = kcg_html._symbol2_innerHTML;
-                kcg_html.classList.remove('kcg-pc');
-                kcg_html.classList.add('kcg-mb');
-                symbol_prt = fp(".sticky", $(symbol2_selector), 4);
-                //console.log(symbol_prt)
-                $(symbol2_selector).parentNode.classList.remove('absolute');
-            }
-            symbol_prt.insertBefore(kcg_html, symbol_prt.childNodes[0]);
-            return;
-        }
-
         setIfr(u);
 
         const ndivkcg = document.createElement("div");
@@ -753,17 +734,23 @@
             ndivkcg.classList.add('kcg-pc');
             ndivkcg.classList.remove('kcg-mb');
             symbol_prt = $(symbol1_selector);
-        } else if ($(symbol2_selector)) {
+        } /* else if ($(symbol2_selector)) {
             ndivkcg.innerHTML = ndivkcg._symbol2_innerHTML;
             ndivkcg.classList.remove('kcg-pc');
             ndivkcg.classList.add('kcg-mb');
             symbol_prt = fp(".sticky", $(symbol2_selector), 4);
-            $(symbol2_selector).parentNode.classList.remove('absolute');
-        }
-        kcg_html = ndivkcg;
-        symbol_prt.insertBefore(kcg_html, symbol_prt.childNodes[0]);
+            let gpt_menu = fp(".no-draggable", $(symbol2_selector), 4);
+            gpt_menu.classList.remove('absolute');
+        } */
+        symbol_prt.insertBefore(ndivkcg, symbol_prt.childNodes[0]);
         loadMenu();
         const ndivmenu = $(".kmenu");
+        ndivkcg.addEventListener('click', () => {
+            ndivmenu.classList.add('kshow');
+        });
+        ndivmenu.addEventListener('mouseleave', () => {
+            ndivmenu.classList.remove('kshow');
+        });
 
         addStyle();
         setUserOptions();
@@ -781,20 +768,19 @@
     /*左边栏*/
     nav.flex {
         background: linear-gradient(to right top, #d0dcff, #f0f0ff, #fff3f3);
-        padding-right: .6rem;
     }
-    nav.flex li>div {
+    nav.flex #history>div {
         height: 3.5rem;
         background-color: rgba(255, 255, 255, 0.4);
     }
-    nav.flex li>div>a {
+    nav.flex #history>div>a {
         mask-image: unset !important;
     }
-    nav.flex li>div .bg-gradient-to-l {
+    nav.flex #history>div .bg-gradient-to-l {
         background-image: unset;
     }
 
-    nav.flex li::after {
+    nav.flex #history::after {
         content: "";
         display: block;
         height: 1px;
@@ -802,18 +788,19 @@
     }
 
     /*左边栏选中条目*/
-    nav.flex li>div.bg-token-sidebar-surface-tertiary {
+    nav.flex #history>div.bg-token-sidebar-surface-tertiary {
         background-color: #bfcbfd;
     }
     /*左边栏鼠标滑动*/
-    nav.flex li>div:hover {
+    nav.flex #history>div:hover {
         background-color: #d5ddff;
     }
 
-    /*左边栏时间分类*/
+    /*左边栏一级功能*/
     @layer utilities {
         .bg-token-bg-elevated-secondary {
             background-color: unset !important;
+            background: linear-gradient(to top, #f4f6ff, #f3f3ff, #f4f6ff);
         }
     }
 
@@ -828,38 +815,45 @@
     .ever-changing {
         nav.flex {
             background: linear-gradient(to right top, #171717, #060606, #171717);
-            padding-right: .6rem;
         }
-        nav.flex li>div {
+        nav.flex #history>div {
             height: 3.5rem;
             background-color: rgba(111, 111, 111, 0.25);
         }
-        nav.flex li>div>a {
+        nav.flex #history>div>a {
             mask-image: unset !important;
         }
-        nav.flex li>div .bg-gradient-to-l {
+        nav.flex #history>div .bg-gradient-to-l {
             background-image: unset;
         }
 
-        nav.flex li::after {
+        nav.flex #history::after {
             content: "";
             display: block;
             height: 1px;
             background: linear-gradient(to right, transparent, #535353, transparent);
         }
-        nav.flex li>div.bg-token-sidebar-surface-tertiary {
+        nav.flex #history>div.bg-token-sidebar-surface-tertiary {
             background-color: #444;
         }
-        nav.flex li>div:hover {
+        nav.flex #history>div:hover {
             background-color: #2f2f2f;
         }
 
-        nav.flex li a .navtitle {
+        nav.flex #history a .navtitle {
             color: #f4f4f4 !important;
         }
 
-        nav.flex li a .navlast {
+        nav.flex #history a .navlast {
             color: #d0d0d0 !important;
+        }
+
+        /*左边栏一级功能*/
+        @layer utilities {
+            .bg-token-bg-elevated-secondary {
+                background-color: unset !important;
+                background: linear-gradient(to top, #131313, #111, #131313);
+            }
         }
     }
 }
@@ -872,6 +866,7 @@
     font-weight: bold;
     user-select: none;
     border-color: #cec86b;
+    cursor: pointer;
 }
 @keyframes gradient {
     0%{background-color:#F0B27A;}
@@ -882,6 +877,8 @@
     position: relative;
     margin-top: .5rem;
     margin-bottom: .5rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
 }
 .kcg-mb {
     position: absolute;
@@ -923,9 +920,6 @@
     font-weight: normal;
     font-size: 0.9rem;
     line-height: normal;
-}
-#kcg:hover .kmenu, .kmenu:hover {
-    display: block;
 }
 .kmenu li {
     display: block;
@@ -1036,16 +1030,17 @@
     }
 }
 
-
-
+/*侧边栏*/
 nav {
     position: relative;
+    scrollbar-width: thin;
 }
 nav div.pt-3\\.5 {
     padding-bottom: .5rem;
     padding-top: .25rem;
 }
 
+/*选择按钮*/
 .checkbutton {
     height: 1.25rem;
     right: 0.85rem;
@@ -1062,6 +1057,7 @@ nav div.pt-3\\.5 {
     transition: transform 0.2s ease-in-out;
 }
 
+/*展示大屏*/
 .largescreen {
     .flex.text-base {
         max-width: unset;
@@ -1109,8 +1105,11 @@ nav.flex .transition-all {
     position: unset;
 }
 
-.hide {
+.khide {
     display: none;
+}
+.kshow {
+    display: block;
 }
 
 `);
@@ -1251,7 +1250,7 @@ nav.flex .transition-all {
     };
 
     const attachDate = function(kec_object) {
-        $$('nav.flex li a').forEach(async el => {
+        $$('nav.flex #history a').forEach(async el => {
             let a_id;
             const a_id_m = el.href.match('/(([^/]{4,}?){4}-[^/]{4,}?)(\\?|$)(\\?|$)');
             if (a_id_m) {
@@ -1276,7 +1275,7 @@ nav.flex .transition-all {
 
             if (!title || !update_time) return;
             if (!$('.navtitle', el) || !$('.navdate', el) || !$('.navlast', el)) {
-                const cdiv_old = $(`.overflow-hidden`, el);
+                const cdiv_old = $(`.flex.min-w-0.grow.items-center`, el);
                 cdiv_old.style.display = "none";
                 const cdiv_new = document.createElement("div");
                 cdiv_new.className = `flex-1 text-ellipsis overflow-hidden break-all relative`;
