@@ -23,13 +23,14 @@
 
     // 注册菜单
     GM_registerMenuCommand(enabled ? "已启用（点我可关闭）" : "已禁用（点我可开启）", function() {
-        enabled = !enabled;
-        GM_setValue('enabled_114514', enabled);
+        GM_setValue('enabled_114514', !enabled);
         location.reload();
     });
+    if (!enabled){
+        return
+    }
     GM_registerMenuCommand(enabled_contextmenu ? "右键菜单已解锁（点我可关闭）" : "右键菜单未解锁（点我可开启）", function() {
-        enabled_contextmenu = !enabled_contextmenu;
-        GM_setValue('enabled_contextmenu_114514', enabled_contextmenu);
+        GM_setValue('enabled_contextmenu_114514', !enabled_contextmenu);
         location.reload();
     });
 
@@ -41,10 +42,6 @@
 
     // 覆盖addEventListener
     EventTarget.prototype.addEventListener = function(type, listener, options) {
-        if (!enabled) {
-            return originalAddEventListener.call(this, type, listener, options);
-        }
-
         if (type === 'copy') {
             return;
         }
@@ -65,10 +62,6 @@
 
     // 覆盖事件方法
     Event.prototype.preventDefault = function() {
-        if (!enabled) {
-            return originalPreventDefault.call(this);
-        }
-
         if (this.type === 'copy' || (this.type === 'keydown' && this.keyCode === 67 && (this.ctrlKey || this.metaKey))) {
             return;
         }
@@ -76,10 +69,6 @@
     };
 
     Event.prototype.stopPropagation = function() {
-        if (!enabled) {
-            return originalStopPropagation.call(this);
-        }
-
         if (this.type === 'copy' || (this.type === 'keydown' && this.keyCode === 67 && (this.ctrlKey || this.metaKey))) {
             return;
         }
@@ -87,10 +76,6 @@
     };
 
     Event.prototype.stopImmediatePropagation = function() {
-        if (!enabled) {
-            return originalStopImmediatePropagation.call(this);
-        }
-
         if (this.type === 'copy' || (this.type === 'keydown' && this.keyCode === 67 && (this.ctrlKey || this.metaKey))) {
             return;
         }
@@ -98,10 +83,10 @@
     };
 
     // 添加右键菜单复制支持
-    document.addEventListener('contextmenu', function(e) {
-        if (!enabled || !enabled_contextmenu) {
-            return;
-        }
-        e.stopImmediatePropagation();
-    }, true);
+    if (enabled_contextmenu) {
+        document.addEventListener('contextmenu', function(e) {
+            e.stopImmediatePropagation();
+        }, true);
+    }
+
 })();
