@@ -19,7 +19,7 @@
 
     // 获取用户设置
     let enabled = GM_getValue('enabled_114514', true);
-    let enabled_contextmenu = GM_getValue('enabled_contextmenu_114514', true);
+    let enabled_contextmenu = GM_getValue('enabled_contextmenu_114514', false);
 
     // 注册菜单
     GM_registerMenuCommand(enabled ? "已启用（点我可关闭）" : "已禁用（点我可开启）", function() {
