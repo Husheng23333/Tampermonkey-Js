@@ -8,7 +8,9 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=google.com
 // @grant        none
 // @run-at       document-body
-// @license       GPL-2.0-only
+// @license      GPL-2.0-only
+// @downloadURL  https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/Gemini%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
+// @updateURL    https://raw.githubusercontent.com/Husheng23333/Tampermonkey-Js/refs/heads/main/Gemini%E5%A4%A7%E5%B1%8F%E4%BC%98%E5%8C%96/main.js
 // ==/UserScript==
 
 (function () {
