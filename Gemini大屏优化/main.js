@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Gemini大屏优化
 // @namespace    http://tampermonkey.net/
-// @version      1.0.0.1
+// @version      1.0.0.2
 // @description  优化Gemini页面样式
 // @author       HuSheng
-// @match        https://gemini.google.com/app/**
+// @match        https://gemini.google.com/app*
 // @icon         https://www.gstatic.com/lamda/images/gemini_sparkle_4g_512_lt_f94943af3be039176192d.png
 // @grant        none
 // @run-at       document-body
