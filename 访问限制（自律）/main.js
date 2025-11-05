@@ -16,7 +16,7 @@
 
     let domains = GM_getValue('domains', []);
 
-    GM_registerMenuCommand('管理列表', openDomainManager);
+    GM_registerMenuCommand('🌐 管理列表', openDomainManager);
 
     const currentHost = window.location.hostname;
     const matched = domains.some(domain => currentHost.includes(domain));
