@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         为什么不让我复制？（解除如飞书、钉钉、百度文库等的复制限制）
+// @name         为什么不让我复制？
 // @namespace    http://tampermonkey.net/
-// @version      2.1
+// @version      2.1.2
 // @description  恢复被网站禁用的复制功能，例如飞书、钉钉、百度文库等。支持右键菜单复制，支持ctrl+c、command+c复制
 // @author       HuSheng
 // @match        *://*/*
@@ -18,19 +18,19 @@
     'use strict';
 
     // 获取用户设置
-    let enabled = GM_getValue('enabled_114514', true);
-    let enabled_contextmenu = GM_getValue('enabled_contextmenu_114514', false);
+    let enabled = GM_getValue('copy_enabled_hs', true);
+    let enabled_contextmenu = GM_getValue('copy_enabled_contextmenu_hs', false);
 
     // 注册菜单
-    GM_registerMenuCommand(enabled ? "已启用（点我可关闭）" : "已禁用（点我可开启）", function() {
-        GM_setValue('enabled_114514', !enabled);
+    GM_registerMenuCommand(enabled ? "✅已启用（点我关闭）" : "❌已禁用（点我开启）", function() {
+        GM_setValue('copy_enabled_hs', !enabled);
         location.reload();
     });
     if (!enabled){
         return
     }
-    GM_registerMenuCommand(enabled_contextmenu ? "右键菜单已解锁（点我可关闭）" : "右键菜单未解锁（点我可开启）", function() {
-        GM_setValue('enabled_contextmenu_114514', !enabled_contextmenu);
+    GM_registerMenuCommand(enabled_contextmenu ? "✅右键菜单已解锁（点我关闭）" : "❌右键菜单未解锁（点我开启）", function() {
+        GM_setValue('copy_enabled_contextmenu_hs', !enabled_contextmenu);
         location.reload();
     });
 
