@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         访问限制（自律）
 // @namespace    http://tampermonkey.net/
-// @version      1.0.0
+// @version      1.0.2
 // @description  访问限制（自律）
 // @author       HuSHeng
 // @match        *://*/*
@@ -14,7 +14,7 @@
 (function () {
     'use strict';
 
-    let domains = GM_getValue('domains', []);
+    let domains = GM_getValue('fwxz_domains_hs', []);
 
     GM_registerMenuCommand('🌐 管理列表', openDomainManager);
 
@@ -123,7 +123,7 @@
 
                 li.querySelector('.domain-del').onclick = () => {
                     domains.splice(i, 1);
-                    GM_setValue('domains', domains);
+                    GM_setValue('fwxz_domains_hs', domains);
                     refreshList();
                 };
 
@@ -149,7 +149,7 @@
 
             if (!domains.includes(val)) {
                 domains.push(val);
-                GM_setValue('domains', domains);
+                GM_setValue('fwxz_domains_hs', domains);
                 refreshList();
                 input.value = '';
                 showMessage('域名添加成功', 'success');
