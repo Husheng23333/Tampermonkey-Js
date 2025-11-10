@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gemini大屏优化
 // @namespace    http://tampermonkey.net/
-// @version      1.0.0.2
+// @version      1.0.0.3
 // @description  优化Gemini页面样式
 // @author       HuSheng
 // @match        https://gemini.google.com/app*
@@ -23,7 +23,7 @@
     const css_css = [
         {key: '.conversation-container', value: 'max-width: 100%', sleep: 0},
         {key: '.conversation-container user-query', value: 'max-width: 100%', sleep: 0},
-        {key: '.input-area-container', value: 'max-width: 100%', sleep: 0},
+        {key: '.input-area-container', value: 'max-width: 1400px', sleep: 0},
         {key: 'hallucination-disclaimer', value: 'display: none', sleep: 0},
         {key: 'input-container', value: 'margin-bottom: 10px', sleep: 0},
     ];
