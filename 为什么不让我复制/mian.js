@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         为什么不让我复制？
 // @namespace    http://tampermonkey.net/
-// @version      2.3.1
+// @version      2.3.2
 // @description  恢复被网站禁用的复制功能，例如飞书、钉钉、百度文库等。支持ctrl+c、command+c复制。注意默认不启动，且只能解锁纯文本，解锁后仍然会出现弹窗，但可以正常复制内容。使用时请遵守相关法律法规及网站规定，尊重版权和知识产权。
 // @author       HuSheng
 // @match        *://*/*
@@ -15,16 +15,6 @@
 (function () {
     'use strict';
 
-    // 文本可选中
-    const style = document.createElement('style');
-    style.textContent = `
-        * {
-            user-select: text !important;
-            -webkit-user-select: text !important;
-        }
-    `;
-    document.documentElement.appendChild(style);
-
     const original = {
         addEventListener: EventTarget.prototype.addEventListener,
         preventDefault: Event.prototype.preventDefault,
@@ -33,17 +23,41 @@
     };
 
     let enabled = false;
+    let selectableStyle = null;
 
     // 注册菜单命令
     GM_registerMenuCommand("启用/关闭 (默认为关闭)", function () {
         enabled = !enabled;
         if (enabled) {
             overrideEvents();
+            enableSelectable();
         } else {
             restoreEvents();
+            disableSelectable();
         }
         updateTitle();
     });
+
+    function enableSelectable() {
+        if (selectableStyle) {
+            return;
+        }
+        selectableStyle = document.createElement('style');
+        selectableStyle.textContent = `
+            * {
+                user-select: text !important;
+                -webkit-user-select: text !important;
+            }
+        `;
+        document.documentElement.appendChild(selectableStyle);
+    }
+
+    function disableSelectable() {
+        if (selectableStyle) {
+            selectableStyle.remove();
+            selectableStyle = null;
+        }
+    }
 
     function updateTitle() {
         if (!document.title) return;
