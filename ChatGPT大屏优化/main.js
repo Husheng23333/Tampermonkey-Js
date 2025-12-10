@@ -761,6 +761,19 @@
 
     const addStyle = function() {
         GM_addStyle(`
+/*隐藏头部开通Plus按钮*/
+#page-header .hidden {
+    display: none;
+}
+
+/*隐藏底部文字描述*/
+.text-token-text-secondary.relative {
+    display: none;
+}
+#thread-bottom {
+    margin-bottom: 1rem;
+}
+
 /*
 :root {
     --keenobservation-user-image-url: '';
