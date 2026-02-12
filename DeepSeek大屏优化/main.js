@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         DeepSeek大屏优化
 // @namespace    http://tampermonkey.net/
-// @version      2.4.3
+// @version      2.4.4
 // @description  优化DeepSeek页面样式
 // @author       HuSheng
 // @match        https://chat.deepseek.com/**
 // @exclude      https://chat.deepseek.com/sign_in
 // @exclude      https://chat.deepseek.com/sign_up
 // @exclude      https://chat.deepseek.com/forgot_password
-// @icon         https://chat.deepseek.com/favicon.svg
+// @icon         https://cdn.deepseek.com/chat/icon.png
 // @grant        none
 // @run-at       document-body
 // @license       GPL-2.0-only
