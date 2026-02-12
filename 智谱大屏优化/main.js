@@ -4,7 +4,7 @@
 // @version      1.0.0
 // @description  优化智谱页面样式
 // @author       HuSheng
-// @match        https://chat.z.ai/c/*
+// @match        https://chat.z.ai/*
 // @icon         https://z-cdn.chatglm.cn/z-ai/static/logo.svg
 // @grant        none
 // ==/UserScript==
@@ -19,7 +19,10 @@
     // CSS
     const css_css = [
         {key: '#messages-container > div > div > div > div.w-full > div', value: 'width: calc(100% - 30px); max-width: calc(100% - 30px); margin-left: 15px; margin-right: 15px', sleep: 0},
-        {key: '.transparent > div', value: 'width: calc(100% - 30px); max-width: calc(100% - 30px); margin-left: 15px; margin-right: 15px', sleep: 0},
+        {key: '.messageInputContainer > div > .mx-auto', value: 'width: calc(100% - 30px); max-width: calc(100% - 30px); margin-left: 15px; margin-right: 15px', sleep: 0},
+        {key: '.p-4', value: 'display: none;', sleep: 0},
+        {key: '.placeholder-input', value: 'max-width: 100%;', sleep: 0},
+        {key: '.pl-4.pr-4.pb-4', value: 'padding-bottom: 5px;', sleep: 0},
     ];
     const css_del = [];
 
