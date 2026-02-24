@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         智谱大屏优化
 // @namespace    http://tampermonkey.net/
-// @version      1.0.0
+// @version      1.0.1
 // @description  优化智谱页面样式
 // @author       HuSheng
 // @match        https://chat.z.ai/*
@@ -11,6 +11,19 @@
 
 (function () {
     'use strict';
+
+    // 夜间模式适配
+    function darkModeAdaptation() {
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = systemDark ? "dark" : "light";
+        localStorage.setItem("theme", theme);
+        console.log('系统暗色模式:', systemDark);
+
+        // 修改 html 标签的 class
+        const html = document.documentElement;
+        html.classList.remove('dark', 'light');
+        html.classList.add(theme);
+    }
 
     // xpath
     const xpaths_css = [];
@@ -195,6 +208,7 @@
 
     // 页面加载时执行
     function init() {
+        darkModeAdaptation();
         modifyElementStyles();
         deleteClazz();
         observeUrlChanges();
