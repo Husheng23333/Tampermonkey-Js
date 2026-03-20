@@ -17,13 +17,14 @@
         {key: '/html/body/div/div/div/main/div/div[2]/div[1]/div/div[1]/div/div/div[2]/div/div/div', value: '--center-content-max-width: 95%', sleep: 0},
         {key: '/html/body/div/div/div/main/div/div[2]/div[2]', value: '--center-content-max-width: 95%', sleep: 0},
         {key: '/html/body/div/div/div/main/div/div[2]/div[2]/div/div/div[1]/div/div[2]/div[1]', value: 'max-width: 100%', sleep: 0},
-        {key: '/html/body/div/div/div/main/div/div[2]/div[3]', value: 'max-width: 1400px', sleep: 0},
-        {key: '/html/body/div/div/div/main/div/div[2]/div[3]', value: 'width: 90%', sleep: 0},
+        {key: '/html/body/div/div/div/main/div/div[2]/div[3]', value: 'max-width: 1400px; width: 90%; padding: 0', sleep: 0},
     ];
     const xpaths_del = [
         {key: '/html/body/div/div/div/main/div/div[2]/div[2]/div/div', clazzList: ['max-w-[var(--content-max-width)]'], sleep: 0},
         {key: '/html/body/div/div/div/main/div/div[2]/div[2]/div/div/div[1]', clazzList: ['max-w-[var(--content-max-width)]'], sleep: 0},
         {key: '/html/body/div/div/div/main/div/div[2]/div[3]', clazzList: ['max-w-[var(--content-max-width)]'], sleep: 0},
+        {key: '/html/body/div[1]/div/div/main/div/div[2]/div[3]/div/div', clazzList: ['max-w-[var(--content-max-width)]'], sleep: 0},
+        {key: '/html/body/div[1]/div/div/main/div/div[2]/div[3]/div/div/div[1]', clazzList: ['max-w-[var(--content-max-width)]'], sleep: 0},
     ]
 
     // CSS
