@@ -239,9 +239,38 @@
         style.dataset.for = "result"; // 给style标签加上data-for= "result"属性，防止被百度删除
         bodyDOM.prepend(soTabPanelDOM);// 将dom添加到body前面，防止被百度和BING删除
     }
+    // URL 变化监听器
+    function addUrlChangeListener(callback) {
+        // 监听 popstate 事件（浏览器前进/后退）
+        window.addEventListener('popstate', callback);
+
+        // 监听 hashchange 事件
+        window.addEventListener('hashchange', callback);
+
+        // 劫持 pushState 和 replaceState
+        const originalPushState = history.pushState;
+        const originalReplaceState = history.replaceState;
+
+        history.pushState = function (...args) {
+            originalPushState.apply(this, args);
+            callback();
+        };
+
+        history.replaceState = function (...args) {
+            originalReplaceState.apply(this, args);
+            callback();
+        };
+    }
+
     if (window.onurlchange === null) {
         // feature is supported
         window.addEventListener('urlchange', () => {
+            console.log('url has changed');
+            soTabInit();
+        });
+    } else {
+        // 使用通用监听器
+        addUrlChangeListener(() => {
             console.log('url has changed');
             soTabInit();
         });
