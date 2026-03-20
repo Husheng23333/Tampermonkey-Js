@@ -25,6 +25,13 @@
         html.classList.add(theme);
     }
 
+    // 监听系统主题变化
+    function observeThemeChanges() {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', darkModeAdaptation);
+    }
+
+
     // xpath
     const xpaths_css = [];
     const xpaths_del = []
@@ -212,6 +219,7 @@
         modifyElementStyles();
         deleteClazz();
         observeUrlChanges();
+        observeThemeChanges();
 
         const debouncedModify = debounce(() => {
             modifyElementStyles();
