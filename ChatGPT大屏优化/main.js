@@ -23,6 +23,7 @@
     const css_css = [
         {key: '#page-header > div.pointer-events-none', value: 'display: none', sleep: 0},
         {key: '#thread-bottom-container > div.text-center > div.select-none', value: 'display: none', sleep: 0},
+        {key: '.bg-token-bg-elevated-secondary > .relative button', value: 'display: none', sleep: 0},
         {key: '#thread-bottom', value: 'margin-bottom: 8px;', sleep: 0},
 
     ];
