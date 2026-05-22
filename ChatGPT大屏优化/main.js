@@ -21,11 +21,8 @@
 
     // CSS
     const css_css = [
-        {key: '#page-header > div.pointer-events-none', value: 'display: none', sleep: 0},
-        {key: '#thread-bottom-container > div.text-center > div.select-none', value: 'display: none', sleep: 0},
-        {key: '.bg-token-bg-elevated-secondary > .relative button', value: 'display: none', sleep: 0},
-        {key: '#thread-bottom', value: 'margin-bottom: 8px;', sleep: 0},
-
+        {key: '#thread-bottom-container > div.text-token-text-secondary', value: 'display: none', sleep: 0},
+        {key: '#stage-slideover-sidebar > div > div > div > div > div.relative > div > button', value: 'display: none', sleep: 0},
     ];
     const css_del = [
         {
@@ -36,7 +33,7 @@
             ], sleep: 0
         },
         {
-            key: '#thread-bottom > div > div.text-base > div', clazzList: [
+            key: '#thread-bottom > div > div.text-base > div > div', clazzList: [
                 '[--thread-content-max-width:40rem]',
                 '@w-lg/main:[--thread-content-max-width:48rem]',
                 'max-w-(--thread-content-max-width)',
